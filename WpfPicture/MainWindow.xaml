@@ -1,0 +1,61 @@
+﻿<Window x:Class="WpfPicture.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPicture"
+        mc:Ignorable="d"
+        Title="MainWindow" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Height="500.958" Width="656.853">
+    <Window.Resources>
+        <local:PolConverter x:Key="PolConverter1"/>
+        <local:SlikaConverter x:Key="SlikaConverter1"/>
+        
+    </Window.Resources>
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="10,24,0,0" TextWrapping="Wrap" Text="ID:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,61,0,0" TextWrapping="Wrap" Text="IME:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,108,0,0" TextWrapping="Wrap" Text="PREZIME:" VerticalAlignment="Top"/>
+        <TextBox x:Name="TextBoxId" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="78,20,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TextBoxIme" HorizontalAlignment="Left" Height="23" Margin="78,60,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TextBoxPrezime" HorizontalAlignment="Left" Height="23" Margin="78,107,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <GroupBox Header="Pol" HorizontalAlignment="Left" Height="auto" Margin="10,140,0,0" VerticalAlignment="Top" Width="188">
+
+            <StackPanel>
+                <RadioButton Content="Muski" Margin="5" Name="RadioMuski" IsChecked="True"/>
+                <RadioButton Content="Zenski" Margin="5" Name="RadioZenski"/>
+            </StackPanel>
+        </GroupBox>
+        <TextBlock HorizontalAlignment="Left" Margin="12,222,0,0" TextWrapping="Wrap" Text="Odaberi sliku:" VerticalAlignment="Top"/>
+        <Button x:Name="ButtonOdaberi" Content="Odaberi" HorizontalAlignment="Left" Margin="108,221,0,0" VerticalAlignment="Top" Width="75" Click="ButtonOdaberi_Click"/>
+        <Border BorderBrush="Red" BorderThickness="2" HorizontalAlignment="Left" Height="170" Margin="12,251,0,0" VerticalAlignment="Top" Width="237">
+
+            <Image x:Name="Image1" Stretch="Fill"/>
+        </Border>
+        <DataGrid x:Name="DataGrid1" HorizontalAlignment="Left" Height="217" Margin="217,20,0,0" VerticalAlignment="Top" Width="400"
+                  AlternationCount="2"
+                  RowBackground="LightBlue"
+                  SelectionMode="Single"
+                  SelectionUnit="FullRow"
+                  SelectionChanged="DataGrid1_SelectionChanged"
+                  IsReadOnly="True"
+                  >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Ime" Width="70" Binding="{Binding Path=Ime}"/>
+                <DataGridTextColumn Header="Prezime" Width="90" Binding="{Binding Path=Prezime}"/>
+                <DataGridTextColumn Header="Pol" Width="70" Binding="{Binding Path=Pol, Converter={StaticResource PolConverter1}}"/>
+                <DataGridTemplateColumn Header="Fotografija">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Path=Slika, Converter={StaticResource SlikaConverter1}}" Height="30" Width="100" Margin="5"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="ButtonResetuj" Content="Resetuj" HorizontalAlignment="Left" Margin="108,438,0,0" VerticalAlignment="Top" Width="76" Click="ButtonResetuj_Click"/>
+        <Button x:Name="ButtonUbaci" Content="Ubaci" HorizontalAlignment="Left" Margin="220,436,0,0" VerticalAlignment="Top" Width="74" Click="ButtonUbaci_Click"/>
+        <Button x:Name="ButtonPromeni" Content="Promeni" HorizontalAlignment="Left" Margin="339,436,0,0" VerticalAlignment="Top" Width="75" Click="ButtonPromeni_Click"/>
+        <Button x:Name="ButtonObrisi" Content="Obrisi" HorizontalAlignment="Left" Margin="462,436,0,0" VerticalAlignment="Top" Width="74" Click="ButtonObrisi_Click"/>
+
+    </Grid>
+</Window>
